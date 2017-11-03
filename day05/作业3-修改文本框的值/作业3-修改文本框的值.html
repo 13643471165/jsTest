@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul{width: 570px;margin: 0 auto;border: 1px solid black;padding: 0;}
+        li{list-style: none;margin: 0;position: relative;height: 40px;}
+        ul li div{width: 570px;height: 40px;line-height: 40px;vertical-align: middle;border-bottom:1px solid black;}
+        .top,.bottom{position: absolute;top:0;left: 0;}
+        .top i{background: url(./img/pencil.png);display: inline-block;width: 20px;height: 20px;background-size: 100% 100%;
+        vertical-align: middle;margin-left: 5px;cursor: pointer;}
+        .bottom{display: none;}
+        .bottom input:nth-child(1){width: 150px;height: 20px;outline: none;border:1px solid #56E718;}
+        .bottom input[type="button"]{color:#56E718;background: none;outline: none; }
+    </style>
+    <script>
+        window.onload = function(){
+            var oUl = document.getElementById('course');
+            var aLi = document.getElementsByTagName('li');
+
+            for(var i=0; i<aLi.length; i++){
+                fn1(aLi[i]);
+            }
+            
+            function fn1(oLi){
+                var oDiv1= oLi.getElementsByTagName('div')[0];
+                var oDiv2= oLi.getElementsByTagName('div')[1];
+                var oI = oDiv1.getElementsByTagName('i')[0];
+                var oSpan = oDiv1.getElementsByTagName('span')[0];
+                var oTextInput = oDiv2.getElementsByTagName('input')[0];
+                var oSaveInput = oDiv2.getElementsByTagName('input')[1];
+                var oCancelInput = oDiv2.getElementsByTagName('input')[2];   
+                
+                oI.onclick = function(){
+                    var name = oSpan.innerHTML;
+                    oTextInput.value = name;
+                    oDiv1.style.display = "none";
+                    oDiv2.style.display = "block";
+                }
+
+                oSaveInput.onclick = function(){
+                    var name = oTextInput.value;
+                    if(name != ''){
+                        oSpan.innerHTML = name;
+                        oDiv1.style.display = "block";
+                        oDiv2.style.display = "none";
+                    }
+                }
+
+                oCancelInput.onclick = function(){
+                        oDiv1.style.display = "block";
+                        oDiv2.style.display = "none";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="course">
+        <ul>
+            <li>
+                <div class="top">
+                    <span>妙味远程课堂</span>
+                    <i></i>
+                </div>
+                <div class="bottom">
+                    <input type="text">
+                    <input type="button" value="保存">
+                    <input type="button" value="取消">
+                </div>
+            </li>
+            <li>
+                <div class="top">
+                    <span>妙味远程课堂</span>
+                    <i></i>
+                </div>
+                <div class="bottom">
+                    <input type="text">
+                    <input type="button" value="保存">
+                    <input type="button" value="取消">
+                </div>
+            </li>
+            <li>
+                <div class="top">
+                    <span>妙味远程课堂</span>
+                    <i></i>
+                </div>
+                <div class="bottom">
+                    <input type="text">
+                    <input type="button" value="保存">
+                    <input type="button" value="取消">
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,li{margin: 0;padding: 0;list-style: none;}
+        li{width: 310px;height: 35px;line-height: 35px;}
+        li input{margin: 0 15px;}
+        li span:nth-of-type(1){display: inline-block;width: 160px;}
+        div{width: 310px;height: 35px;line-height: 35px;}
+        div input{margin: 0 15px;}
+    </style>
+    <script>
+        window.onload = function(){
+            var oUl = document.getElementsByTagName('ul')[0];
+            var aLi = oUl.getElementsByTagName('li');
+            var aInput = [];
+            var oDiv = document.getElementsByTagName('div')[0];
+            var oInput = oDiv.getElementsByTagName('input')[0];
+            var num = 0;
+            var colorArr = ['#8CF8C6','#fff']
+
+            for(var i=0; i<aLi.length; i++){
+                aLi[i].index = i;
+                aLi[i].style.background = colorArr[i%colorArr.length];
+                aInput.push(aLi[i].getElementsByTagName('input')[0]);
+                aInput[i].index = i;
+
+                aLi[i].onmouseover = function(){
+                    if(!aInput[this.index].checked){
+                        this.style.background = '#B8C5BF'
+                    }
+                }
+
+                aLi[i].onmouseleave = function(){
+                    if(!aInput[this.index].checked){
+                        this.style.background = colorArr[this.index%colorArr.length];
+                    }
+                }
+            }
+
+            for(var i=0; i<aLi.length; i++){
+                aInput[i].onclick = function(){
+                    if(this.checked){
+                        //点击之前没有选中
+                        num++;
+                        aLi[this.index].style.background = "#B8C5BF";
+                    }else{
+                        //点击之前已选中
+                        num--;
+                        aLi[this.index].style.background = colorArr[this.index%colorArr.length];
+                    }
+
+                    if(num == 6){
+                        oInput.checked = true;
+                    }else{
+                        oInput.checked = false;
+                    }
+                }
+            }
+
+            oInput.onclick = function(){
+               if(!this.checked){
+                    num = 0;
+                    for(var i=0; i<aLi.length; i++){
+                        aLi[i].style.background = colorArr[i%colorArr.length];
+                        aInput[i].checked = false;
+                    }
+               }else{
+                    num = 6;
+                    for(var i=0; i<aLi.length; i++){
+                        aLi[i].style.background = '#B8C5BF';
+                        aInput[i].checked = true;
+                    }
+               }
+            }
+        }
+    </script>
+</head>
+<body>
+    <ul>
+        <li>
+            <input type="checkbox">
+            <span>私奔</span>
+            <span>梁博</span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <span>北京北京</span>
+            <span>梁博，黄勇</span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <span>我爱你中国</span>
+            <span>梁博</span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <span>花火</span>
+            <span>梁博</span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <span>回来</span>
+            <span>梁博</span>
+        </li>
+        <li>
+            <input type="checkbox">
+            <span>爱要有你才完美</span>
+            <span>梁博</span>
+        </li>
+    </ul>
+    <div>
+        <input type="checkbox">全选
+    </div>
+</body>
+</html>

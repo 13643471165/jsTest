@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        a{text-decoration: none;color: black;}
+        a:visited{color: black;}
+        ul,li{margin: 0;padding: 0;list-style: none;}
+        nav{width: 520px;height: 35px;background: #0688DF;border-radius: 5px;line-height: 35px;padding-left: 10px;position: relative;margin: 0 auto;}
+        nav .navTab{display: inline-block;padding: 0 15px;line-height: 25px;border-radius: 5px;vertical-align: middle;color: white;}
+        nav .navTab:hover{background: #A7B5BD;}
+        nav i{width: 1px;height: 20px;margin: 0px 5px;display: inline-block;background: black;vertical-align: middle;}
+        ul li{position: absolute;display: none;top: 45px;height: 25px;background: #e6e6e6;padding: 0 15px;border-radius: 5px;}
+        ul li{height: 25px;line-height: 25px;}
+        ul li:nth-child(1){left: -20px;}
+        ul li:nth-child(1) em{position: absolute;top: -10px;;width: 20px;height: 20px;background: url(./img/1.png);left: 50px;}
+        ul li:nth-child(2){left: 37px;}
+        ul li:nth-child(2) em{position: absolute;top: -10px;;width: 20px;height: 20px;background: url(./img/1.png);left: 85px;}
+        ul li:nth-child(3){left: 95px;}
+        ul li:nth-child(3) em{position: absolute;top: -10px;;width: 20px;height: 20px;background: url(./img/1.png);left: 125px;}
+        ul li:nth-child(4){left: 180px;}
+        ul li:nth-child(4) em{position: absolute;top: -10px;;width: 20px;height: 20px;background: url(./img/1.png);left: 118px;}
+    </style>
+    <script>
+        window.onload = function(){
+            var oA = document.getElementsByClassName('navTab');
+            var oUl = document.getElementsByTagName('ul')[0];
+            var aLi = oUl.getElementsByTagName('li');
+            var timer = null;
+            var tag = -1;
+            var isLi = false;
+
+            for(var i=0; i<oA.length; i++){
+                oA[i].index = i;
+                oA[i].onmouseover = function(){
+                    if(tag == -1){
+                        tag = this.index;
+                        if(isLi){
+                            clearInterval(timer);
+                            aLi[isLi-1].style.display = 'none';
+                            isLi = false;
+                        }
+                    }else{
+                        clearInterval(timer);
+                        aLi[tag].style.display = 'none';
+                        tag = this.index; 
+                    }
+                    aLi[this.index].style.display = 'block';
+                }
+
+                oA[i].onmouseout = function(){
+                    var index = this.index;
+                    timer = setTimeout(function(){
+                        aLi[index].style.display = 'none';
+                    },1000);
+                }
+            }
+
+            for(var i=0; i<aLi.length; i++){
+                aLi[i].index = i;
+                aLi[i].onmouseover = function(){
+                    console.log(1);
+                    clearInterval(timer);
+                }
+
+                aLi[i].onmouseout = function(ev){
+                    var that = this;
+                    timer = setTimeout(function(){
+                        that.style.display = 'none';
+                    },1000);
+                    tag = -1;
+                    isLi = that.index+1;
+                    //alert(isLi);
+                    //ev.stopPropagation();
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <a class="navTab" href="">首页</a><i></i>
+        <a class="navTab" href="">关于我们</a><i></i>
+        <a class="navTab" href="">作品</a><i></i>
+        <a class="navTab" href="">博客</a><i></i>
+        <ul>
+            <li>
+                <em></em>
+                <a href="">最近耿勋</a>
+                <a href="">活动</a>
+                <a href="">报名试听</a>
+                <a href="">学员反馈</a>
+            </li>
+            <li>
+                <em></em>
+                <a href="">拉拉拉</a>
+                <a href="">哈哈哈</a>
+                <a href="">不不不</a>
+                <a href="">学员反馈</a>
+            </li>
+            <li>
+                <em></em>
+                <a href="">第三个</a>
+                <a href="">揍你</a>
+                <a href="">一二三四</a>
+                <a href="">学员反馈</a>
+            </li>
+            <li>
+                <em></em>
+                <a href="">js教程</a>
+                <a href="">php教程</a>
+                <a href="">java教程</a>
+                <a href="">大数据</a>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>

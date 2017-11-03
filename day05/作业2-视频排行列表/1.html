@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,li{margin: 0;padding: 0;list-style: none;}
+        ul{width:520px;border: 1px solid black;}
+        #list li{width: 520px;height: 55px;background: #C8D0D0;border-bottom: 1px solid #A6ACAC;line-height: 55px;vertical-align: middle;}
+        #list li i{display:inline-block;width: 36px;height: 55px;background: url(./img/toplist-icon.png) no-repeat;line-height:55px;
+        text-align: center;vertical-align: middle;font-size: 18px;color: #fff;}
+        #list li span{display: inline-block;width:180px;height: 55px;line-height: 55px;vertical-align: middle;}
+        #list li i{background-position:-120px -25px;margin-right: 10px;}
+        #list li:nth-child(1) i{ background-position:0px -25px;}
+        #list li:nth-child(2) i{ background-position:-40px -25px;}
+        #list li:nth-child(3) i{ background-position:-80px -25px;}
+        #list li.active{width: 520px;height: 140px;background: #fff;line-height: 140px;}
+        #list li.active i{margin-right: 10px;}
+        #list li.active .actLeft{height: 140px;float: left;line-height: 140px;}
+        #list li.active .actRight{height: 140px;width: 380px;float: left;line-height: normal;}
+        #list li.active .actRight img{width: 180px;height: 100px;border: none;float: left;margin-top: 20px;}
+        #list li.active .actRight .intro{float: left;width: 180px;height: 100px;margin-left: 10px;margin-top: 20px;}
+        #list li.active .actRight .intro span{line-height: normal;}
+        #list li.active .actRight .intro span:nth-child(1){font-size: 18px;height: 28px;line-height: 28px;}
+        #list li.active .actRight .intro span:nth-child(2){font-size: 14px;height: 34px;line-height: 34px;color: #999;width: 180px;}
+        #list li.active .actRight .intro span:nth-child(3){font-size: 12px;height: 18px;line-height: 18px;color: #999;margin-top: 18px;}
+    </style>
+    <script>
+        window.onload = function(){
+            var data = [
+                {img:'./img/1.jpg',introduce:'王丽坤深宫权谋',num:'更新至28集',name:'天泪传奇之凤凰无双'},
+                {img:'./img/2.jpg',introduce:'任嘉伦断高能奇案',num:'66集全',name:'通天狄仁杰'},
+                {img:'./img/3.jpg',introduce:'Mike毛晓彤惺惺相惜',num:'53集全',name:'美味奇缘'},
+                {img:'./img/4.jpg',introduce:'兄弟联手热血斗魔',num:'更新至46集',name:'轩辕剑之汉之云'},
+                {img:'./img/5.jpg',introduce:'四合院里的社会变迁',num:'更新至34集',name:'情满四合院'},
+                {img:'./img/6.jpg',introduce:'黄子韬致敬经典',num:'更新至50集',name:'大话西游之爱你一万年'},
+                {img:'./img/7.jpg',introduce:'郑恺袁姗姗返璞归真',num:'更新至19集',name:'国民大生活'},
+                {img:'./img/8.jpg',introduce:'张丹峰诠释烈火青春',num:'更新至6集',name:'特勤精英'},
+                {img:'./img/9.jpg',introduce:'首部社会派推理悬疑剧',num:'12集全',name:'无证之罪'},
+                {img:'./img/10.jpg',introduce:'王雷李小萌的革命爱情',num:'更新至45集',name:'爱人同志'}
+            ]
+
+            var oUl = document.getElementById('list');
+            var aLi = document.getElementsByTagName('li');
+            var oLi = 0;
+
+           for(var i=0; i<aLi.length; i++){
+                aLi[i].index = i;
+                aLi[i].onmouseover = function(){
+                    fn1(oLi,this,this.index);
+                    oLi = this.index;
+                }
+           }
+
+            function fn1(pre,now,index){
+                var oNowI = now.getElementsByTagName('i');
+                var oPreI = aLi[pre].getElementsByTagName('i');
+
+                aLi[pre].className = "";
+                aLi[pre].innerHTML = ' <i>'+pre+'</i>'+
+                                    '<span>'+data[pre].name+'</span>';
+                now.className = "active";
+                now.innerHTML = '<div class="actLeft">'+
+                                    '<i>'+(index+1)+'</i>'+
+                                '</div>'+
+                                '<div class="actRight">'+
+                                    '<img src="'+data[index].img+'" alt="">'+
+                                    '<div class="intro">'+
+                                        '<span>'+data[index].name+'</span>'+
+                                        '<span>'+data[index].introduce+'</span>'+
+                                        '<span>'+data[index].num+'</span>'+
+                                    '</div>'+
+                                '</div>';
+                
+                if(index >= 3){
+                    oNowI[0].innerHTML = index+1;
+                }else{
+                    oNowI[0].innerHTML = '';
+                }
+
+                if(pre >= 3){
+                    oPreI[0].innerHTML = pre+1;
+                }else{
+                    oPreI[0].innerHTML = '';
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <ul id="list">
+        <li class="active">
+            <div class="actLeft">
+                <i></i>
+            </div>
+            <div class="actRight">
+                <img src="./img/1.jpg" alt="">
+                <div class="intro">
+                    <span>天泪传奇之凤凰无双</span>
+                    <span>王丽坤深宫权谋</span>
+                    <span>更新至28集</span>
+                </div>
+            </div>
+        </li>
+        <li>
+            <i></i>
+            <span>通天狄仁杰</span>
+        </li>
+        <li>
+            <i></i>
+            <span>美味奇缘</span>
+        </li>
+        <li>
+            <i>4</i>
+            <span>轩辕剑之汉之云</span>
+        </li>
+        <li>
+            <i>5</i>
+            <span>情满四合院</span>
+        </li>
+        <li>
+            <i>6</i>
+            <span>大话西游之爱你一万年</span>
+        </li>
+        <li>
+            <i>7</i>
+            <span>国民大生活</span>
+        </li>
+        <li>
+            <i>8</i>
+            <span>特勤精英</span>
+        </li>
+        <li>
+            <i>9</i>
+            <span>无证之罪</span>
+        </li>
+        <li>
+            <i>10</i>
+            <span>爱人同志</span>
+        </li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #list{width: 170px;height: 430px;margin: 0 auto;border:1px solid black;position: relative;overflow: hidden;}
+        #list span{height: 25px;width: 170px;position: absolute;left: 0;cursor: pointer;z-index: 2;}
+        #list span:nth-of-type(1){top: 0;background: url(./img/1.png) no-repeat;background-color:#B8C5BF;background-position-x: center;}
+        #list span:nth-of-type(2){bottom: 0;background: url(./img/2.png) no-repeat;background-color:#B8C5BF;background-position-x: center;}
+        #list ul,li{margin: 0;padding: 0;list-style: none;}
+        #list ul{position: absolute;top: 25px;}
+        #list ul li{width: 170px;height: 95px;background: yellow;border-bottom: 1px solid black;}
+    </style>
+    <script>
+        window.onload = function(){
+            var oDiv = document.getElementById('list');
+            var aSpan = oDiv.getElementsByTagName('span');
+            var oUl = oDiv.getElementsByTagName('ul')[0];
+            var num = 25; //最大值为25  最小值为-355
+            var timer = null;
+
+            aSpan[0].onmousedown = function(){
+                timer = setInterval(function(){
+                    if(num < 25){
+                        num+=1;
+                        oUl.style.top = num + 'px';
+                    }
+                },30);
+            }
+
+            aSpan[1].onmousedown = function(){
+                timer = setInterval(function(){
+                    if(num >= -355){
+                        num-=1;
+                        oUl.style.top = num + 'px';
+                    }
+                },30);
+            }
+
+            aSpan[0].onmouseup = function(){
+                clearInterval(timer);
+            }
+
+            aSpan[1].onmouseup = function(){
+                clearInterval(timer);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="list">
+        <span></span>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+        </ul>
+        <span></span>
+    </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul,li{margin: 0;padding: 0;list-style: none;}
+        #qq{width: 250px;border: 1px solid black;}
+        #qq li span{font-size: 25px;line-height: 30px;padding-left: 10px;background: url(./img/ico1.gif) no-repeat;background-position: 0px 12px;
+        background-color: #12CBB9;width: 240px;;display: block;}
+        #qq li ul{display: none;}
+        #qq li ul li{padding-left: 15px;border-bottom: 1px solid black;line-height: 25px;width: 235px;}
+        #qq li span.active{font-size: 25px;line-height: 30px;padding-left: 10px;background: url(./img/ico2.gif) no-repeat;background-position: 0px 12px;
+        background-color: #E5EC14;width: 240px;;display: block;}
+    </style>
+    <script>
+        window.onload = function(){
+            var oQq = document.getElementById('qq');
+            var oSpan = document.getElementsByTagName('span');
+            var oUl = oQq.getElementsByTagName('ul');
+            var arrLi = [];
+            var liIndex = 0;
+            var lastIndex = 0;
+
+            for(var i=0; i<oSpan.length; i++){
+                oSpan[i].index = i;
+                oSpan[i].onclick = function(){
+                    if(this.className == ''){
+                        this.className = 'active';
+                        oUl[this.index].style.display = 'block';
+                    }else{
+                        this.className = '';
+                        oUl[this.index].style.display = 'none';
+                    }
+                }
+            }
+
+            for(var i=0; i<oUl.length; i++){
+                var oLi = oUl[i].getElementsByTagName('li');
+                for(var j=0; j<oLi.length; j++){
+                    arrLi.push(oLi[j]);
+                    oLi[j].index = liIndex;
+                    oLi[j].isSelected = false;
+                    liIndex++;
+                    oLi[j].onclick = function(){
+                        if(this.isSelected == false){
+                            arrLi[lastIndex].style.background = 'white';
+                            arrLi[lastIndex].isSelected = false;
+                            this.style.background = '#AFB08E';
+                            this.isSelected = true;
+                            lastIndex = this.index;
+                        }else{
+                            this.style.background = 'white';
+                            this.isSelected = false;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <ul id="qq">
+        <li>
+            <span>我的好友</span>
+            <ul>
+                <li>张三</li>
+                <li>李四</li>
+                <li>王五</li>
+                <li>小明</li>
+                <li>小红</li>
+            </ul>
+        </li>
+        <li>
+            <span>企业好友</span>
+            <ul>
+                <li>哈哈哈</li>
+                <li>呵呵呵</li>
+                <li>啦啦啦</li>
+            </ul>
+        </li>
+        <li>
+            <span>黑名单</span>
+            <ul>
+                <li>赵四</li>
+                <li>孙正</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>

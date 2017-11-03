@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        soan{vertical-align: middle;height: 19px;}
+        i{width: 19px;height: 19px;display: inline-block;vertical-align: middle;background: url(./img/1.png);
+        background-position:-38px 0; cursor: pointer;}
+        .star{display: inline-block;}
+    </style>
+    <script>
+        window.onload = function(){
+            var aI = document.getElementsByTagName('i');
+            var now = -1;
+            var on_Off = true;
+            var arr = ['很差','较差','还行','推荐','力荐'];
+            var oSpan = document.getElementsByTagName('span')[1];
+            var oDiv = document.getElementsByTagName('div')[1];
+
+            for(var i=0; i<aI.length; i++){
+                aI[i].index = i;
+                aI[i].onmouseover = function(){
+                    if(on_Off){
+                        color(this.index);
+                    }else{
+                        color(now);
+                    }
+                }
+
+                aI[i].onclick = function(){
+                    now = this.index;
+                    on_Off = false;
+                }
+            }
+
+            oDiv.onmouseleave = function(){
+                if(on_Off){
+                    color(now);
+                }else{
+                    on_Off = true;
+                }
+            }
+
+
+            function color(now){
+                for(var i=0; i<aI.length; i++){
+                    if(i<=now){
+                        aI[i].style.backgroundPositionX = '0px';
+                    }else{
+                        aI[i].style.backgroundPositionX = '-38px';
+                    }
+                }
+
+                if(now > -1){
+                    oSpan.innerHTML = arr[now];
+                }else{
+                    oSpan.innerHTML = '';
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <span>评价文档：</span>
+        <div class="star">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+        </div>
+        <span></span>
+    </div>
+    
+</body>
+</html>
