@@ -5,8 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        #tab span{display: inline-block;width: 80px;height: 30px;background: gray;line-height: 30px;text-align: center;}
+        #tab span.active{background: green;}
+        #content .tabBox{width: 300px;height: 100px;position: absolute;display: none;}
+        #content .tabBox:nth-of-type(1){display: block;}
+        #content .tabBox .smallCon{width: 200px;height: 100px;float: left;position: relative;}
+        #content .tabBox .smallCon div{width: 200px;height: 100px;position: absolute;display: none;background: red;}
+        #content .tabBox .smallTab{width: 100px;height: 100px;float: left;background: yellow;}
+        #content .tabBox .smallTab span{display: block;width: 100px;height: 33.3%;text-align: center;line-height: 33px;}
+        #content .tabBox .smallCon div.active{display: block;}
+        #content .tabBox .smallTab span.active{background: blue;}
+    </style>
+    <script>
+        window.onload = function(){
+            var num = 0; //用于控制图片的循环切换
+            var oTab = document.getElementById("tab"); 
+            var oContent = document.getElementById("content"); 
+            var aBigTab = oTab.getElementsByTagName("span"); //获取整个图片切换的切换tab
+            var aTabBox = document.getElementsByClassName('tabBox'); //获取俩个用于存放小tab的盒子元素
+            var aSmallCon = document.getElementsByClassName('smallCon');
+            var aSmallTab = document.getElementsByClassName("smallTab");
+            var aSmallConArr = [];
+            var aSmallTabArr = [];
+            var tab = 1;
+
+            for(var i=0; i<aSmallCon.length; i++){
+                var temp = aSmallCon[i].getElementsByTagName('div');
+                for(var j=0; j<temp.length; j++){
+                    aSmallConArr.push(temp[j]);
+                }
+            }
+
+            for(var i=0; i<aSmallTab.length; i++){
+                temp = aSmallTab[i].getElementsByTagName('span');
+                for(var j=0; j<temp.length; j++){
+                    aSmallTabArr.push(temp[j]);
+                }
+            }
+
+            alert(aSmallTabArr.length);
+
+            var timer = setInterval(function(){
+                for(var i=0; i<aSmallTabArr.length; i++){
+                    aSmallTabArr[i].className = '';
+                    aSmallConArr[i].className = '';
+                }
+
+                if(num%3 == 0){
+                    //tab为1时说明应该切换到第一个tab标签页 tab为0时说明切换到第二个标签页
+                    if(tab){
+                        aBigTab[tab].className = '';
+                        aTabBox[tab].style.display = 'none';
+                        tab = 0;
+                        aTabBox[tab].style.display = 'block';
+                        aBigTab[tab].className = 'active';
+                    }else{
+                        aBigTab[tab].className = '';
+                        aTabBox[tab].style.display = 'none';
+                        tab = 1;
+                        aBigTab[tab].className = 'active';
+                        aTabBox[tab].style.display = 'block';
+                    }
+                }
+
+                aSmallTabArr[num%6].className = 'active';
+                aSmallConArr[num%6].className = 'active';
+
+                num++;
+            },1000);
+
+            
+        }
+    </script>
 </head>
 <body>
-    
+    <div id="tab">
+        <span class="active">菜单1</span>
+        <span>菜单2</span>
+    </div>
+    <div id="content">
+        <div class="tabBox">
+            <div class="smallCon">
+                <div class="active">1</div>
+                <div>2</div>
+                <div>3</div>
+            </div>
+            <div class="smallTab">
+                <span class="active">图片1</span>
+                <span>图片2</span>
+                <span>图片3</span>
+            </div>
+        </div>
+        <div class="tabBox">
+            <div class="smallCon">
+                <div class="active">4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <div class="smallTab">
+                <span>图片4</span>
+                <span>图片5</span>
+                <span>图片6</span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
